@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Abiagrow.connect{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-primary mb-8">Dashboard</h1>
+
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl font-bold text-primary mb-2">0</div>
+                <p class="text-gray-600">Total Orders</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl font-bold text-accent mb-2">0</div>
+                <p class="text-gray-600">Products Listed</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl font-bold text-primary-dark mb-2">₦0</div>
+                <p class="text-gray-600">Total Revenue</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl font-bold text-accent-dark mb-2">0</div>
+                <p class="text-gray-600">Active Users</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-primary mb-6">Quick Actions</h2>
+                <div class="space-y-3">
+                    <a href="#" class="block bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-lg transition text-center">
+                        Create New Product
+                    </a>
+                    <a href="#" class="block bg-accent hover:bg-accent-dark text-white font-bold py-3 px-6 rounded-lg transition text-center">
+                        View Orders
+                    </a>
+                    <a href="#" class="block bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition text-center">
+                        Manage Inventory
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-primary mb-6">Profile Information</h2>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm text-gray-600">Username</p>
+                        <p class="text-lg font-semibold">{{ user.username }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Email</p>
+                        <p class="text-lg font-semibold">{{ user.email }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Email Status</p>
+                        <p class="text-lg font-semibold">
+                            {% if user.email_verified %}
+                            <span class="text-green-600">✓ Verified</span>
+                            {% else %}
+                            <span class="text-red-600">✗ Not Verified</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

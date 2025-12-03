@@ -1,0 +1,132 @@
+/* In static/css/admin_custom.css */
+
+/* Custom green theme enhancements */
+:root {
+    --primary-color: #16A34A;
+    --primary-dark: #0D8A3D;
+    --primary-light: #4CAF50;
+}
+
+/* Navbar customization */
+.navbar-success {
+    background-color: #16A34A !important;
+    border-color: #16A34A !important;
+}
+
+.navbar-success .navbar-brand {
+    color: white !important;
+    font-weight: 600;
+}
+
+.navbar-success .navbar-brand:hover {
+    color: #F0F0F0 !important;
+}
+
+/* Sidebar customization */
+.sidebar-dark-success {
+    background-color: #1a252f !important;
+}
+
+.sidebar-dark-success .sidebar-brand {
+    color: #16A34A !important;
+    font-weight: 600;
+}
+
+/* Button customization */
+.btn-success {
+    background-color: #16A34A !important;
+    border-color: #16A34A !important;
+}
+
+.btn-success:hover {
+    background-color: #0D8A3D !important;
+    border-color: #0D8A3D !important;
+}
+
+.btn-outline-success {
+    color: #16A34A !important;
+    border-color: #16A34A !important;
+}
+
+.btn-outline-success:hover {
+    background-color: #16A34A !important;
+    color: white !important;
+}
+
+/* Card headers */
+.card-header {
+    background-color: #f8f9fa !important;
+    border-bottom: 2px solid #16A34A !important;
+}
+
+/* Table customization */
+.table thead th {
+    border-bottom: 2px solid #16A34A !important;
+    color: #16A34A;
+}
+
+/* Links */
+a {
+    color: #16A34A !important;
+}
+
+a:hover {
+    color: #0D8A3D !important;
+}
+
+/* Form focus */
+.form-control:focus {
+    border-color: #16A34A !important;
+    box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25) !important;
+}
+
+/* Custom badge for agriculture */
+.badge-agro {
+    background-color: #16A34A;
+    color: white;
+}
+
+/* Login page customization */
+.login-box {
+    border-top: 4px solid #16A34A !important;
+}
+
+.login-logo {
+    color: #16A34A !important;
+}
+
+/* Progress bars */
+.progress-bar {
+    background-color: #16A34A !important;
+}
+
+/* Pagination */
+.page-item.active .page-link {
+    background-color: #16A34A !important;
+    border-color: #16A34A !important;
+}
+
+.page-link {
+    color: #16A34A !important;
+}
+
+.page-link:hover {
+    color: #0D8A3D !important;
+}
+
+/* Alert customization */
+.alert-success {
+    background-color: rgba(22, 163, 74, 0.1) !important;
+    border-color: #16A34A !important;
+    color: #155724 !important;
+}
+
+/* Custom agro icons */
+.agro-icon {
+    color: #16A34A;
+}
+
+/* Dashboard cards */
+.card.bg-success {
+    background-color: #16A34A !important;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #16A34A;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+        }
+        .features {
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #16A34A;
+        }
+        .button {
+            display: inline-block;
+            background-color: #16A34A;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎉 Welcome to Abiagrow.connect!</h1>
+    </div>
+    <div class="content">
+        <h2>Hello {{ user.username }},</h2>
+        <p>Your email has been successfully verified! Welcome to our agriculture community.</p>
+        
+        <div class="features">
+            <h3>Get Started:</h3>
+            <div class="feature-item">
+                <strong>🌱 Complete Your Profile</strong>
+                <p>Add your farm details and preferences</p>
+            </div>
+            <div class="feature-item">
+                <strong>📊 Access Dashboard</strong>
+                <p>Monitor your farming activities</p>
+            </div>
+            <div class="feature-item">
+                <strong>🛒 Browse Products</strong>
+                <p>Explore agricultural products and services</p>
+            </div>
+        </div>
+        
+        <p style="text-align: center;">
+            <a href="{{ site_url }}" class="button">Go to Dashboard</a>
+        </p>
+        
+        <p>Need help? Check out our <a href="{{ site_url }}/help">help center</a> or contact our support team.</p>
+        
+        <p>Happy Farming!<br>
+        <strong>The Abiagrow.connect Team</strong></p>
+    </div>
+</body>
+</html>

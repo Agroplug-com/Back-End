@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Abiagrow.connect{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6 text-center text-primary">Create Account</h1>
+    
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+        <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% for field in form %}
+        <div>
+            <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                {{ field.label }}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+            <div class="text-red-600 text-sm mt-1">
+                {% for error in field.errors %}
+                {{ error }}<br>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded-lg transition">
+            Register
+        </button>
+    </form>
+    
+    <div class="mt-4 text-center text-sm">
+        <p>Already have an account? <a href="{% url 'userauths:login' %}" class="text-primary hover:underline">Login here</a></p>
+    </div>
+</div>
+
+<style>
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+}
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="tel"]:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #16A34A;
+    border-color: transparent;
+}
+</style>
+{% endblock %}
