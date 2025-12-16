@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from userauths.models import Profile, CustomUser
 from .utils import send_verification_email, send_welcome_email
 from .decorators import email_verification_required
-
+from farmers.models import Farmer
 
 from django.utils import timezone
 from datetime import timedelta
@@ -14,8 +14,87 @@ import uuid
 
 # Create your views here.
 
+def signup_view(request):
+    return render(request, "userauths/signup_view.html")
+
+def register_farmer(request):
+    if request.user.is_authenticated:
+        messages.info(request, 'You are already logged in.')
+        return redirect('store:home')
+    
+    form = RegistrationForm()
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        
+        if form.is_valid():
+            # Create user but don't commit so we can set password properly
+            user = form.save()
+           
+            # Ensure token and timestamp are set
+            user.verification_token = uuid.uuid4()
+            user.token_created_at = timezone.now()
+            user.save()
+
+            # Create profile
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+            phone_number = form.cleaned_data.get('phone_number')
+            
+            farm_name = request.POST.get("farm_name")
+            farm_location = request.POST.get("farm_location")
+            
+            
+            Profile.objects.create(
+                user=user,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                phone_number=phone_number,
+                user_type="farmer"
+            )
+
+            Farmer.objects.create(
+                user = user,
+                farm_name=farm_name,
+                farm_location=farm_location,
+                phone_number=phone_number,
+                email=email,
+            )
+            
+             # Send verification email
+            try:
+                send_verification_email(user, request)
+                messages.success(request, 'Registration successful! Please check your email to verify your account.')
+            except Exception as e:
+                messages.warning(request, f'Account created but verification email failed to send. Error: {str(e)}')
+                
+            return redirect('userauths:signup-success')
+
+        else:
+            
+            
+            error = {
+                field: ', '.join(str(e.message) for e in error_list)
+                for field, error_list in form.errors.as_data().items()
+            }
+            messages.error(request, f"Error: {error}")
+            return redirect("userauths:register_farmer")
+            
+       
+
+    context = {
+        'form': form,
+        'error':error if 'error' in locals() else None
+               }
+    return render(request, 'userauths/farmer-signup.html', context)
+
+
 
 def register_user(request):
+    if request.user.is_authenticated:
+        messages.info(request, 'You are already logged in.')
+        return redirect('store:home')
     form = RegistrationForm()
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -52,9 +131,12 @@ def register_user(request):
             return redirect('userauths:signup-success')
 
     context = {'form': form}
-    return render(request, 'userauths/register.html', context)
+    return render(request, 'userauths/buyer-signup.html', context)
 
 def login_view(request):
+    if request.user.is_authenticated:
+        messages.info(request, 'You are already logged in.')
+        return redirect('store:home')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -145,4 +227,4 @@ def logout_view(request):
     """Logout user"""
     logout(request)
     messages.info(request, 'You have been logged out.')
-    return redirect('userauths:home')
+    return redirect('store:home')

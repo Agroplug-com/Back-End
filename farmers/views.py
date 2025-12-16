@@ -6,7 +6,7 @@ from datetime import datetime
 
 from .models import Farmer
 from userauths.models import Profile
-from .forms import FarmerRegisterForm
+# from .forms import FarmerRegisterForm
 
 # Create your views here.
 

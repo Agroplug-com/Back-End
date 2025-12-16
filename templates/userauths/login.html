@@ -1,33 +1,179 @@
-{% extends "base.html" %}
-
-{% block title %}Login - Abiagrow.connect{% endblock %}
-
-{% block content %}
-<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
-    <h1 class="text-3xl font-bold mb-6 text-center text-primary">Login</h1>
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgriConnect Login</title>
     
-    <form method="post" class="space-y-4">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    {% tailwind_css %}
+  </head>
+  <body
+    class="bg-white min-h-screen flex items-center justify-center p-4 font-['Inter']"
+  >
+    <div
+      class="w-full max-w-[450px] bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-xl p-8 sm:p-10"
+    >
+      <div class="flex items-center mb-6">
+        <div
+          class="w-8 h-8 bg-[#22c55e] rounded md flex items-center justify-center mr-2"
+        >
+          <i class="fa-solid fa-leaf text-white text-sm"></i>
+        </div>
+        <span class="text-2xl font-semibold text-[#22c55e] tracking-tight"
+          >Agriconnect</span
+        >
+      </div>
+
+      <h1 class="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h1>
+      <p class="text-xs text-gray-500 mb-8">
+        Choose your role and sign in to continue your journey
+      </p>
+
+      
+      <form action="{% url "userauths:login" %}" class="space-y-5" method="POST">
         {% csrf_token %}
-        
         <div>
-            <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
-            <input type="text" name="username" id="username" required 
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+          <label class="block text-sm font-semibold text-gray-900 mb-1.5"
+            >Username</label
+          >
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+              <i class="fa-regular fa-envelope text-gray-400"></i>
+            </div>
+            <input
+              type="tex"
+              class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#22c55e] text-sm"
+              placeholder="Username"
+              name="username"
+            />
+          </div>
         </div>
-        
+
         <div>
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-            <input type="password" name="password" id="password" required 
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+          <label class="block text-sm font-semibold text-gray-900 mb-1.5"
+            >Password</label
+          >
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+              <i class="fa-solid fa-lock text-gray-400"></i>
+            </div>
+            <input
+              type="password"
+              class="block w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#22c55e] text-sm"
+              placeholder="••••••••"
+              id="password"
+              name="password"
+            />
+            <div
+              class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+            >
+              <i
+                class="fa-regular fa-eye text-gray-400 hover:text-gray-600"
+                id="togglePassword"
+              ></i>
+            </div>
+          </div>
         </div>
-        
-        <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded-lg transition">
-            Login
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input
+              type="checkbox"
+              id="remember"
+              class="h-4 w-4 border-gray-300 rounded text-[#22c55e] focus:ring-[#22c55e] accent-[#22c55e]"
+            />
+            <label for="remember" class="ml-2 block text-xs text-gray-500"
+              >Remember me</label
+            >
+          </div>
+          <a
+            href="#"
+            class="text-xs font-medium text-[#22c55e] hover:text-[#16a34a]"
+            >Forgot Password?</a
+          >
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 px-4 rounded-lg shadow-sm text-sm font-medium text-white bg-[#22c55e] hover:bg-[#16a34a] focus:ring-2 focus:ring-offset-2 focus:ring-[#22c55e] transition-colors"
+        >
+          Sign In to AgriConnect
         </button>
-    </form>
-    
-    <div class="mt-4 text-center text-sm">
-        <p>Don't have an account? <a href="{% url 'userauths:register' %}" class="text-primary hover:underline">Register here</a></p>
+      </form>
+
+      <div class="mt-6 text-center border-t border-gray-100 pt-6">
+        <p class="text-xs text-gray-600">
+          Don't have a farmer account?
+          <a href="{% url "userauths:signup_view" %}" class="font-medium text-[#22c55e] hover:text-[#16a34a]"
+            >Sign Up</a
+          >
+        </p>
+      </div>
     </div>
-</div>
-{% endblock %}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+    <script>
+      const passwordInput = document.getElementById("password");
+      const togglePassword = document.getElementById("togglePassword");
+
+      togglePassword.addEventListener("click", () => {
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          togglePassword.classList.remove("fa-eye-slash");
+          togglePassword.classList.add("fa-eye");
+        } else {
+          passwordInput.type = "password";
+          togglePassword.classList.remove("fa-eye");
+          togglePassword.classList.add("fa-eye-slash");
+        }
+      });
+    </script>
+     <!-- SweetAlert2: show Django messages nicely -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        {% for message in messages %}
+          Swal.fire({
+            title: '{{ message.level_tag|capfirst }}',
+            text: '{{ message|escapejs }}',
+            icon: {% if 'error' in message.tags %}'error'{% elif 'warning' in message.tags %}'warning'{% elif 'success' in message.tags %}'success'{% else %}'info'{% endif %},
+            confirmButtonColor: '#16a34a',
+            customClass: {
+              popup: 'rounded-lg'
+            }
+          });
+        {% endfor %}
+      });
+    </script>
+    {% endif %}
+
+    {# Optional single message via context: swal_message = {'title':..., 'text':..., 'level': 'success'|'error'|'info'|'warning'} #}
+    {% if swal_message %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const m = {{ swal_message|default:'{}'|safe }};
+        Swal.fire({
+          title: m.title || 'Notice',
+          text: m.text || '',
+          icon: m.level || 'info',
+          confirmButtonColor: '#16a34a',
+          customClass: { popup: 'rounded-lg' }
+        });
+      });
+    </script>
+    {% endif %}
+  </body>
+</html>

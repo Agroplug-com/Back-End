@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="src/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-gray-50 flex items-center justify-center min-h-screen font-sans text-gray-800"
+  >
+    <!-- Card Container -->
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+      <!-- Back Link -->
+      <a href="landinglog.html" class="block text-sm text-gray-500 mb-6 hover:text-gray-900">
+        &larr; Back to role Selection
+      </a>
+
+      <!-- Logo Section -->
+      <div class="flex items-center gap-2 mb-6">
+        <div
+          class="w-8 h-8 bg-green-500 rounded md flex items-center justify-center mr-2"
+        >
+        <i class="fa-solid fa-leaf text-white text-sm"></i>
+        </div>
+        <h1 class="text-2xl font-bold text-green-500">Agriconnect</h1>
+      </div>
+
+      <!-- Header -->
+      <h2 class="text-3xl font-bold mb-2">Create Account</h2>
+      <p class="text-gray-1000 mb-6 text-lg">Sign up as buyer</p>
+
+      <!-- Form -->
+      <form class="space-y-4" method="POST">
+        {% csrf_token %}
+        <!-- Names -->
+        <div class="flex gap-4">
+          <div class="w-1/2">
+            <label class="block text-sm font-bold mb-1">First Name</label>
+            {{ form.first_name }}
+          </div>
+          <div class="w-1/2">
+            <label class="block text-sm font-bold mb-1">Last Name</label>
+            {{ form.last_name }}
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-bold mb-1">Email</label>
+          <div class="mt-1 relative">
+            {{ form.email }}
+            <span class="absolute left-3 top-2.5 text-gray-400"
+              ><i class="bi bi-envelope"></i
+            ></span>
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div>
+          <label class="block text-sm font-bold mb-1">Phone Number</label>
+          <div class="mt-1 relative">
+            {{ form.phone_number }}
+            <span class="absolute left-3 top-2.5 text-gray-400"
+              ><i class="bi bi-telephone"></i
+            ></span>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="relative">
+          <label class="block text-sm font-bold mb-1">Password</label>
+          {{ form.password1 }}
+          <span class="absolute left-3 top-8 text-gray-400">
+            <i class="bi bi-lock"></i>
+          </span>
+
+          <span class="absolute left-90 top-8 text-gray-400"
+            ><i class="bi bi-eye"></i
+          ></span>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="relative">
+          <label class="block text-sm font-bold mb-1">Confirm Password</label>
+          {{ form.password2 }}
+          <span class="absolute left-3 top-8 text-gray-400">
+            <i class="bi bi-lock"></i>
+          </span>
+
+          <span class="absolute left-90 top-8 text-gray-400"
+            ><i class="bi bi-eye"></i
+          ></span>
+        </div>
+
+        <!-- Terms Checkbox -->
+        <div class="flex items-center text-sm">
+          <input type="checkbox" class="mr-2 accent-green-600" required/>
+          <span class="text-gray-600"
+            >I agree to the
+            <a href="#" class="text-green-600 font-medium">Terms & Conditions</a
+            >.</span
+          >
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-colors"
+        >
+          Create Account
+        </button>
+      </form>
+
+      <!-- Footer -->
+      <p class="mt-6 text-center text-sm text-gray-600">
+        Already have a farmer account?
+        <a href="{% url "userauths:login" %}" class="text-green-600 font-bold hover:underline">Sign in</a>
+      </p>
+    </div>
+
+    <!-- SweetAlert2: show Django messages nicely -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        {% for message in messages %}
+          Swal.fire({
+            title: '{{ message.level_tag|capfirst }}',
+            text: '{{ message|escapejs }}',
+            icon: {% if 'error' in message.tags %}'error'{% elif 'warning' in message.tags %}'warning'{% elif 'success' in message.tags %}'success'{% else %}'info'{% endif %},
+            confirmButtonColor: '#16a34a',
+            customClass: {
+              popup: 'rounded-lg'
+            }
+          });
+        {% endfor %}
+      });
+    </script>
+    {% endif %}
+  </body>
+</html>

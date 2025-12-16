@@ -1,49 +1,1048 @@
-{% extends "base.html" %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AbiaGrow.Connect - Transforming Agriculture in Abia State</title>
 
-{% block title %}Home - Abiagrow.connect{% endblock %}
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-{% block content %}
-<div class="py-12">
-    <div class="max-w-4xl mx-auto">
-        <div class="bg-linear-to-r from-primary to-accent text-white p-12 rounded-lg shadow-lg mb-12">
-            <h1 class="text-5xl font-bold mb-4">Welcome to Abiagrow.connect</h1>
-            <p class="text-xl mb-6">Connecting farmers and merchants for sustainable agricultural growth.</p>
-            <a href="#features" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition">
-                Learn More
-            </a>
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    {% tailwind_css %}
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-sans">
+    <!-- Navbar -->
+    <nav
+      class="flex justify-between items-center p-4 border-b border-gray-200 sticky top-0 bg-white z-50 shadow-sm">
+      <!-- Logo -->
+      <div class="flex flex-col items-center cursor-pointer">
+        <div class="text-green-600 text-2xl">🍃</div>
+        <span class="font-bold text-gray-900 text-sm">AbiaGrow.Connect</span>
+      </div>
+
+      <!-- Links -->
+      <div class="hidden md:flex gap-8 font-medium text-gray-700 items-center">
+        <a
+          href="mainlanding.html"
+          class="text-gray-900 border-b-2 border-green-600 pb-1"
+          >Home</a
+        >
+
+        <!-- Dropdown Section: About -->
+        <div class="relative group">
+          <button
+            onclick="window.location.href ='about.html'"
+            class="flex items-center gap-1 hover:text-green-600 pb-1"
+          >
+            About
+            <span class="text-xs"><i class="bi bi-caret-down-fill"></i></span>
+          </button>
+          <div
+            class="absolute top-full left-0 mt-0 w-56 bg-white border border-gray-200 rounded-xl shadow-xl hidden group-hover:block overflow-hidden"
+          >
+            <div class="p-2 flex flex-col gap-1">
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >What is AbiaGrow?</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Our Vision</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Our Mission</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Why Choose Us</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Yield Challenge</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Blueprint</a
+              >
+            </div>
+          </div>
         </div>
 
-        <div id="features" class="grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                <div class="text-4xl mb-4">🌾</div>
-                <h3 class="text-xl font-bold text-primary mb-2">For Farmers</h3>
-                <p class="text-gray-600">Connect directly with buyers and sell your produce at fair prices.</p>
+        <!-- Dropdown Section: Services -->
+        <div class="relative group">
+          <button
+            onclick="window.location.href ='services.html'"
+            class="flex items-center gap-1 hover:text-green-600 pb-1"
+          >
+            Services
+            <span class="text-xs"><i class="bi bi-caret-down-fill"></i></span>
+          </button>
+          <div
+            class="absolute top-full left-0 mt-0 w-48 bg-white border border-gray-200 rounded-xl shadow-xl hidden group-hover:block overflow-hidden"
+          >
+            <div class="p-2 flex flex-col gap-1">
+              <a
+                href="marketplace.html"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Market Place</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Logistics</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Insurance</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Loan</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Education</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-900 bg-gray-50 hover:bg-green-600 hover:text-white rounded-md transition-colors"
+                >Consultancy</a
+              >
             </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                <div class="text-4xl mb-4">🛒</div>
-                <h3 class="text-xl font-bold text-primary mb-2">For Merchants</h3>
-                <p class="text-gray-600">Source quality agricultural products directly from verified farmers.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                <div class="text-4xl mb-4">📱</div>
-                <h3 class="text-xl font-bold text-primary mb-2">Easy Platform</h3>
-                <p class="text-gray-600">Simple and intuitive interface for seamless transactions.</p>
-            </div>
+          </div>
         </div>
 
-        {% if user.is_authenticated %}
-        <div class="mt-12 bg-blue-50 p-8 rounded-lg">
-            <h2 class="text-2xl font-bold text-primary mb-4">Quick Start</h2>
-            <p class="text-gray-600 mb-4">Welcome {{ user.username }}! Choose what you'd like to do:</p>
-            <div class="flex gap-4">
-                <a href="{% url "store:dashboard" %}" class="bg-white hover:bg-primary-dark text-red-400 font-bold py-2 px-6 rounded-lg transition">
-                    Go to Dashboard
-                </a>
-            </div>
-        </div>
-        {% endif %}
+        <a href="contact-us-page.html" class="hover:text-green-600 pb-1"
+          >Contact</a
+        >
+      </div>
+
+      <!-- Auth Buttons -->
+      <div class="flex gap-3">
+        <button
+          id="login"
+          onclick="window.location.href='http://127.0.0.1:8000/userauths/login/'"
+          class="border border-green-600 text-green-600 text-sm px-4 py-2 rounded-lg hover:bg-green-50 transition"
+        >
+          Log in
+        </button>
+        <button
+          id="sign-up"
+          onclick="window.location.href='http://127.0.0.1:5504/landinglog.html'"
+          class="bg-green-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-green-700 transition hidden sm:block"
+        >
+          Sign up
+        </button>
+      </div>
+    </nav>
+    
+    <!-- Hero Section with Slider -->
+    <div class="relative overflow-hidden h-screen">
+      <div
+        id="heroSlider"
+        class="flex h-full transition-transform duration-700 touch-pan-x"
+      >
+        <!-- Slide 1 -->
+        <header
+          class="relative min-w-full h-screen bg-cover bg-center flex items-center justify-center"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1600&q=80');
+          "
+        >
+          <div class="absolute inset-0 bg-black/40"></div>
+          <div class="relative text-center text-white px-4 max-w-4xl z-10">
+            <h1
+              class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-md leading-tight"
+            >
+              <span>Strengthening Abia's Agricultural Value Chain</span>
+            </h1>
+            <p class="text-xl mb-8 drop-shadow-md">
+              Connecting farmers, market place, and agricultural investors
+              through technology, finance and innovation.
+            </p>
+            <button
+              onclick="window.location.href ='landinglog.html'"
+              class="bg-white text-green-600 text-xl font-bold px-8 py-3 rounded-full hover:bg-gray-100 hover:scale-105 transition transform shadow-lg"
+            >
+              Get Started
+            </button>
+          </div>
+        </header>
+
+        <!-- Slide 2 -->
+        <header
+          class="relative min-w-full h-screen bg-cover bg-center flex items-center justify-center"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&q=80');
+          "
+        >
+          <div class="absolute inset-0 bg-black/40"></div>
+          <div class="relative text-center text-white px-4 max-w-4xl z-10">
+            <h1
+              class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-md leading-tight"
+            >
+              Empowering Farmers Across Abia State
+            </h1>
+            <p class="text-xl mb-8 drop-shadow-md">
+              Access improved market visibility, digital financing, and better
+              value chain networks.
+            </p>
+            <button
+              class="bg-white text-green-600 text-xl font-bold px-8 py-3 rounded-full hover:bg-gray-100 hover:scale-105 transition transform shadow-lg"
+            >
+              Learn More
+            </button>
+          </div>
+        </header>
+
+        <!-- Slide 3 -->
+        <header
+          class="relative min-w-full h-screen bg-cover bg-center flex items-center justify-center"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=80');
+          "
+        >
+          <div class="absolute inset-0 bg-black/40"></div>
+          <div class="relative text-center text-white px-4 max-w-4xl z-10">
+            <h1
+              class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-md leading-tight"
+            >
+              Connecting Agriculture With Technology
+            </h1>
+            <p class="text-xl mb-8 drop-shadow-md">
+              Join the movement to digitize farming and create sustainable
+              agricultural impact.
+            </p>
+            <button
+              class="bg-white text-green-600 text-xl font-bold px-8 py-3 rounded-full hover:bg-gray-100 hover:scale-105 transition transform shadow-lg"
+            >
+              Join Us Today
+            </button>
+          </div>
+        </header>
+
+        <!-- Slide 4 -->
+        <header
+          class="relative min-w-full h-screen bg-cover bg-center flex items-center justify-center"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1600&q=80');
+          "
+        >
+          <div class="absolute inset-0 bg-black/40"></div>
+          <div class="relative text-center text-white px-4 max-w-4xl z-10">
+            <h1
+              class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-md leading-tight"
+            >
+              Building Sustainable Food Systems
+            </h1>
+            <p class="text-xl mb-8 drop-shadow-md">
+              From farm to market, we support every step of your agricultural
+              journey.
+            </p>
+            <button
+              class="bg-white text-green-600 text-xl font-bold px-8 py-3 rounded-full hover:bg-gray-100 hover:scale-105 transition transform shadow-lg"
+            >
+              Explore Services
+            </button>
+          </div>
+        </header>
+      </div>
     </div>
-</div>
-{% endblock %}
+
+    <script>
+      const slider = document.getElementById("heroSlider");
+      const totalSlides = slider.children.length;
+      let index = 0;
+      let startX = 0;
+      let currentX = 0;
+
+      function autoMove() {
+        index = (index + 1) % totalSlides;
+        slider.style.transform = `translateX(-${index * 100}%)`;
+      }
+
+      let autoSlide = setInterval(autoMove, 5000);
+
+      slider.addEventListener("touchstart", (e) => {
+        clearInterval(autoSlide);
+        startX = e.touches[0].clientX;
+      });
+
+      slider.addEventListener("touchmove", (e) => {
+        currentX = e.touches[0].clientX;
+      });
+
+      slider.addEventListener("touchend", () => {
+        let diff = startX - currentX;
+        if (diff > 40) {
+          index = (index + 1) % totalSlides;
+        } else if (diff < -40) {
+          index = (index - 1 + totalSlides) % totalSlides;
+        }
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        autoSlide = setInterval(autoMove, 5000);
+      });
+
+      function updateButton(input) {
+        document.getElementById(
+          "login"
+        ).innerText = `Proceed as ${input.value}`;
+      }
+
+      function updateButton(input) {
+        document.getElementById(
+          "sign-up"
+        ).innerText = `Proceed as ${input.value}`;
+      }
+    </script>
+
+    <!-- Impact Stats Section -->
+    <section class="bg-gray-50 py-20 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Our Impact in Numbers
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            From grassroots farming communities to transforming Abia State's
+            agricultural landscape
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center group hover:-translate-y-2 transform border-2 border-transparent hover:border-green-600"
+          >
+            <div
+              class="text-5xl font-bold text-green-600 mb-3 group-hover:scale-110 transition-transform"
+            >
+              15K+
+            </div>
+            <div
+              class="text-gray-600 font-medium text-sm uppercase tracking-wide"
+            >
+              Farmers Onboarded
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center group hover:-translate-y-2 transform border-2 border-transparent hover:border-green-600"
+          >
+            <div
+              class="text-5xl font-bold text-green-600 mb-3 group-hover:scale-110 transition-transform"
+            >
+              250+
+            </div>
+            <div
+              class="text-gray-600 font-medium text-sm uppercase tracking-wide"
+            >
+              Communities Reached
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center group hover:-translate-y-2 transform border-2 border-transparent hover:border-green-600"
+          >
+            <div
+              class="text-5xl font-bold text-green-600 mb-3 group-hover:scale-110 transition-transform"
+            >
+              8,500
+            </div>
+            <div
+              class="text-gray-600 font-medium text-sm uppercase tracking-wide"
+            >
+              Hectares Cultivated
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center group hover:-translate-y-2 transform border-2 border-transparent hover:border-green-600"
+          >
+            <div
+              class="text-5xl font-bold text-green-600 mb-3 group-hover:scale-110 transition-transform"
+            >
+              1,200
+            </div>
+            <div
+              class="text-gray-600 font-medium text-sm uppercase tracking-wide"
+            >
+              Jobs Created
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="py-24 px-4 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            What We Do
+          </h2>
+          <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            We leverage agricultural technology solutions to maximize value for
+            smallholder farmers across Abia State, ensuring food security and
+            economic prosperity for our communities.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div
+            class="relative bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-green-600 transition-all duration-300 hover:shadow-xl group"
+          >
+            <div
+              class="absolute -top-6 left-8 bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg"
+            >
+              1
+            </div>
+            <div class="mt-6">
+              <div class="text-4xl mb-4">👥</div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">MarketPlace</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Connecting Farmers with buyers, suppliers and processing
+                facilities.
+              </p>
+            </div>
+          </div>
+
+          <!-- FLOATING MARKETPLACE BUTTON WITH LABEL -->
+          <div class="fixed bottom-6 right-6 flex flex-col items-center z-50">
+            <!-- Button -->
+            <a
+              href="marketplace.html"
+              class="w-16 h-16 bg-green-600 text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform duration-200"
+            >
+              <i class="bi bi-shop text-3xl"></i>
+            </a>
+            <!-- Label -->
+            <span class="mt-2 text-sm font-semibold text-gray-600"
+              >Marketplace</span
+            >
+          </div>
+
+          <!-- Step 2 -->
+          <div
+            class="relative bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-green-600 transition-all duration-300 hover:shadow-xl group"
+          >
+            <div
+              class="absolute -top-6 left-8 bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg"
+            >
+              2
+            </div>
+            <div class="mt-6">
+              <div class="text-4xl mb-4">🗺️</div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                Logistics & Supply Chain
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Reliable transport and storage solutions to move produce safely
+                from farms to market.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div
+            class="relative bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-green-600 transition-all duration-300 hover:shadow-xl group"
+          >
+            <div
+              class="absolute -top-6 left-8 bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg"
+            >
+              3
+            </div>
+            <div class="mt-6">
+              <div class="text-4xl mb-4">🌱</div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Loans</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Access to low interest financing via partnered financial
+                institutions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div
+            class="relative bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-green-600 transition-all duration-300 hover:shadow-xl group"
+          >
+            <div
+              class="absolute -top-6 left-8 bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg"
+            >
+              4
+            </div>
+            <div class="mt-6">
+              <div class="text-4xl mb-4">📊</div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                Education & Training
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Learn modern Farming, processing, and business skills through
+                workshops and digital courses.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div
+            class="relative bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-green-600 transition-all duration-300 hover:shadow-xl group"
+          >
+            <div
+              class="absolute -top-6 left-8 bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg"
+            >
+              5
+            </div>
+            <div class="mt-6">
+              <div class="text-4xl mb-4">🚜</div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Insurance</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Comprehensive crop insurance to project against unforeseen
+                risks.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 6 -->
+          <div
+            class="relative bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-green-600 transition-all duration-300 hover:shadow-xl group"
+          >
+            <div
+              class="absolute -top-6 left-8 bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg"
+            >
+              6
+            </div>
+            <div class="mt-6">
+              <div class="text-4xl mb-4">💼</div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                Advisory & Extension Services
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Get expert guidance on crop selection, soil management, pest
+                control, & sustainable farming practices.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How We Help Section -->
+    <section class="py-24 px-4 bg-green-600 text-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">How We Help</h2>
+          <p class="text-xl text-green-50 max-w-4xl mx-auto leading-relaxed">
+            We enable the entire agricultural value chain in Abia State,
+            supporting farmers, financiers, processors, and consumers.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-2xl p-10 hover:bg-white/20 transition-all duration-300 hover:scale-105 transform border border-white/20"
+          >
+            <div class="text-5xl mb-6">🌾</div>
+            <h3 class="text-2xl font-bold mb-4">Food Producers</h3>
+            <p class="text-green-50 leading-relaxed">
+              We empower smallholder farmers with quality inputs, training, and
+              market access to achieve optimal yields, profitable returns, and
+              sustainable livelihoods.
+            </p>
+          </div>
+
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-2xl p-10 hover:bg-white/20 transition-all duration-300 hover:scale-105 transform border border-white/20"
+          >
+            <div class="text-5xl mb-6">💰</div>
+            <h3 class="text-2xl font-bold mb-4">Food Financiers</h3>
+            <p class="text-green-50 leading-relaxed">
+              We provide credible financing channels and transparent visibility
+              into farmer operations, driving economic growth and financial
+              inclusion.
+            </p>
+          </div>
+
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-2xl p-10 hover:bg-white/20 transition-all duration-300 hover:scale-105 transform border border-white/20"
+          >
+            <div class="text-5xl mb-6">🏭</div>
+            <h3 class="text-2xl font-bold mb-4">Food Processors</h3>
+            <p class="text-green-50 leading-relaxed">
+              We deliver quality, traceable produce to meet consumer demands,
+              ensuring food security and supporting sustainable processing
+              operations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 px-4 bg-gray-50">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            What Our Customers Say About Us
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Real stories from farmers, buyers, and partners who have transformed
+            their agricultural journey with AbiaGrow.Connect
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 transform"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl mr-4"
+              >
+                👨‍🌾
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-lg">Chibueze Okoro</h4>
+                <p class="text-gray-600 text-sm">Cassava Farmer, Umuahia</p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 leading-relaxed italic">
+              "Before joining AbiaGrow, I struggled to find buyers for my
+              cassava harvest. Now, I have direct access to processors and get
+              fair prices. My income has increased by 60% in just one season!"
+            </p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 transform"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl mr-4"
+              >
+                👩‍🌾
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-lg">Ngozi Eze</h4>
+                <p class="text-gray-600 text-sm">Rice Farmer, Bende</p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 leading-relaxed italic">
+              "The training programs and agricultural advisory services have
+              completely changed how I farm. I learned modern techniques that
+              doubled my rice yield. AbiaGrow is truly a blessing to Abia
+              farmers!"
+            </p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 transform"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl mr-4"
+              >
+                👨‍💼
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-lg">Emeka Nwosu</h4>
+                <p class="text-gray-600 text-sm">Food Processor, Aba</p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 leading-relaxed italic">
+              "Finding reliable farmers with quality produce was always a
+              challenge. AbiaGrow connected me with verified farmers and ensured
+              consistent supply. The logistics service is also excellent!"
+            </p>
+          </div>
+
+          <!-- Testimonial 4 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 transform"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl mr-4"
+              >
+                👩‍🌾
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-lg">Ada Ikpeazu</h4>
+                <p class="text-gray-600 text-sm">
+                  Vegetable Farmer, Isiala Ngwa
+                </p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 leading-relaxed italic">
+              "The crop insurance gave me peace of mind during the last rainy
+              season. When floods damaged part of my farm, I received
+              compensation that helped me recover quickly. Thank you AbiaGrow!"
+            </p>
+          </div>
+
+          <!-- Testimonial 5 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 transform"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl mr-4"
+              >
+                👨‍🌾
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-lg">Uchenna Obi</h4>
+                <p class="text-gray-600 text-sm">
+                  Poultry & Maize Farmer, Ohafia
+                </p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 leading-relaxed italic">
+              "The loan facility helped me expand my farm and buy better
+              equipment. The interest rates are fair, and the repayment plan
+              fits my harvest cycle perfectly. I'm now planning to expand
+              further!"
+            </p>
+          </div>
+
+          <!-- Testimonial 6 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 transform"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl mr-4"
+              >
+                👩‍💼
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-lg">Blessing Uche</h4>
+                <p class="text-gray-600 text-sm">
+                  Agricultural Investor, Umuahia
+                </p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+              <i class="bi bi-star-fill text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 leading-relaxed italic">
+              "AbiaGrow provides the transparency and accountability I need as
+              an investor. I can track farm activities and see real impact. This
+              platform is revolutionizing agribusiness in Abia State!"
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Drop an Enquiry Section -->
+    <section class="py-24 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Drop an Enquiry
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Have questions about our services? Want to partner with us? We'd
+            love to hear from you. Send us a message and we'll get back to you
+            shortly.
+          </p>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-gray-50 to-green-50 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-200"
+        >
+          <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <!-- Full Name -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2 text-sm">
+                Full Name <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-600 focus:ring-2 focus:ring-green-200 outline-none transition"
+              />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2 text-sm">
+                Email Address <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                placeholder="your.email@example.com"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-600 focus:ring-2 focus:ring-green-200 outline-none transition"
+              />
+            </div>
+
+            <!-- Phone Number -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2 text-sm">
+                Phone Number <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                placeholder="+234 XXX XXX XXXX"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-600 focus:ring-2 focus:ring-green-200 outline-none transition"
+              />
+            </div>
+
+            <!-- Subject -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2 text-sm">
+                Subject <span class="text-red-500">*</span>
+              </label>
+              <select
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-600 focus:ring-2 focus:ring-green-200 outline-none transition"
+              >
+                <option value="">Select a subject</option>
+                <option value="general">General Inquiry</option>
+                <option value="farmer">I'm a Farmer</option>
+                <option value="buyer">I'm a Buyer</option>
+                <option value="investor">Investment Opportunity</option>
+                <option value="partnership">Partnership Request</option>
+                <option value="support">Technical Support</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="mb-8">
+            <label class="block text-gray-700 font-semibold mb-2 text-sm">
+              Your Message <span class="text-red-500">*</span>
+            </label>
+            <textarea
+              rows="6"
+              placeholder="Tell us more about your inquiry..."
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-600 focus:ring-2 focus:ring-green-200 outline-none transition resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button
+              class="bg-green-600 text-white text-lg font-bold px-12 py-4 rounded-full hover:bg-green-700 hover:scale-105 transition transform shadow-lg inline-flex items-center gap-2"
+            >
+              <span>Send Message</span>
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="mt-10 pt-8 border-t border-gray-300">
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div class="text-3xl mb-2">📧</div>
+                <p class="text-gray-700 font-semibold text-sm mb-1">Email Us</p>
+                <p class="text-gray-600 text-sm">info@abiagrow.com</p>
+              </div>
+              <div>
+                <div class="text-3xl mb-2">📞</div>
+                <p class="text-gray-700 font-semibold text-sm mb-1">Call Us</p>
+                <p class="text-gray-600 text-sm">+234 XXX XXX XXXX</p>
+              </div>
+              <div>
+                <div class="text-3xl mb-2">📍</div>
+                <p class="text-gray-700 font-semibold text-sm mb-1">Visit Us</p>
+                <p class="text-gray-600 text-sm">Umuahia, Abia State</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-24 px-4 bg-gray-50">
+      <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Ready to Transform Agriculture in Abia?
+        </h2>
+        <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+          Join thousands of farmers, investors, and stakeholders building a
+          sustainable agricultural future.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            onclick="window.location.href ='landinglog.html'"
+            class="bg-green-600 text-white text-lg font-bold px-10 py-4 rounded-full hover:bg-green-700 hover:scale-105 transition transform shadow-lg"
+          >
+            Get Started Today
+          </button>
+          <button
+            class="border-2 border-green-600 text-green-600 text-lg font-bold px-10 py-4 rounded-full hover:bg-green-50 hover:scale-105 transition transform"
+          >
+            Learn More
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-600 text-white py-16 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
+          <div>
+            <div class="flex flex-col items-start mb-6">
+              <div class="text-white text-4xl mb-2">🍃</div>
+              <span class="font-bold text-xl">AbiaGrow.Connect</span>
+            </div>
+            <p class="text-green-50 text-sm leading-relaxed">
+              Empowering Abia State farmers through technology, finance, and
+              sustainable agricultural practices.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+            <ul class="space-y-3 text-green-50 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Our Services</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Impact Stories</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-lg mb-4">Services</h4>
+            <ul class="space-y-3 text-green-50 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition">Marketplace</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Logistics</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Insurance</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Loans</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-lg mb-4">Connect With Us</h4>
+            <div class="flex gap-4 mb-6">
+              <a
+                href="#"
+                class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-800 transition"
+              >
+                <i class="bi bi-facebook"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-800 transition"
+              >
+                <i class="bi bi-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-800 transition"
+              >
+                <i class="bi bi-instagram"></i>
+              </a>
+            </div>
+            <p class="text-green-50 text-sm">info@abiagrow.com</p>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-green-500 pt-8 text-center text-green-50 text-sm"
+        >
+          <p>&copy; 2025 AbiaGrow.Connect. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+   
+  </body>
+</html>

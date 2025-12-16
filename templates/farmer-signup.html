@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agriconnect – Create Account</title>
+    <link rel="stylesheet" href="src/output.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white w-full max-w-md p-8 rounded-xl shadow-md">
+      <a
+        href="landinglog.html"
+        class="flex items-center gap-2 text-gray-600 text-sm mb-6 hover:text-black"
+      >
+        <span class="text-lg">&#8592;</span> Back to role Selection
+      </a>
+
+      <div class="flex items-center mb-6">
+        <div
+          class="w-8 h-8 bg-[#22c55e] rounded md flex items-center justify-center mr-2"
+        >
+          <i class="fa-solid fa-leaf text-white text-sm"></i>
+        </div>
+        <span class="text-2xl font-semibold text-[#22c55e] tracking-tight"
+          >Agriconnect</span
+        >
+      </div>
+
+      <h1 class="text-4xl font-bold text-left mb-4">Create Account</h1>
+      <p class="text-gray-500 text-left text-sm mb-6">
+        Join thousands of farmers on this amazing journey.
+      </p>
+
+      <form class="space-y-4">
+        <div class="flex gap-3">
+          <div class="w-1/2">
+            <label class="text-sm font-medium">First Name</label>
+            <input
+              type="text"
+              placeholder="John"
+              class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+            />
+          </div>
+
+          <div class="w-1/2">
+            <label class="text-sm font-medium">Last Name</label>
+            <input
+              type="text"
+              placeholder="Doe"
+              class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium">Farm Name</label>
+          <div class="relative mt-1">
+            <input
+              type="email"
+              placeholder="Mike's Farm"
+              class="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium">Email</label>
+          <div class="relative mt-1">
+            <input
+              type="email"
+              placeholder="john.doe@gmail.com"
+              class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+            />
+            <span class="absolute left-3 top-2.5 text-gray-400 text-sm"
+              ><i class="bi bi-envelope"></i
+            ></span>
+            <!-- <span class="absolute right-3 top-2.5 text-gray-400 text-lg"></span> -->
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium">Password</label>
+          <div class="relative mt-1">
+            <input
+              type="password"
+              class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+              id="passwordField"
+            />
+            <span class="absolute left-3 top-2.5 text-gray-400 text-sm"
+              ><i class="bi bi-lock"></i
+            ></span>
+            <span class="absolute right-3 top-2.5 text-gray-400 text-lg"
+              ><i class="bi bi-eye" id="toggleIcon"></i
+            ></span>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium">Confirm Password</label>
+          <div class="relative mt-1">
+            <input
+              type="password"
+              class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+              id="confirmPassword"
+            />
+            <span class="absolute left-3 top-2.5 text-gray-400 text-sm"
+              ><i class="bi bi-lock"></i
+            ></span>
+            <span class="absolute right-3 top-2.5 text-gray-400 text-lg"
+              ><i class="bi bi-eye" id="toggleConfirmPassword"></i
+            ></span>
+          </div>
+        </div>
+
+        <label class="flex items-center gap-2 text-sm text-gray-600">
+          <input
+            type="checkbox"
+            class="h-4 w-4 border-gray-400 rounded checked:bg-green-600 accent-white"
+          />
+          I agree to the
+          <a href="#" class="text-green-600 font-medium">Terms & Conditions</a>.
+        </label>
+
+        <button
+          class="w-full bg-green-600 text-white py-2 rounded-md font-medium hover:bg-green-700 transition"
+        >
+          Create Account
+        </button>
+
+        <p class="text-center text-sm text-gray-600 mt-4">
+          Already have a farmer account?
+          <a href="secsignin.html" class="text-green-600 font-medium"
+            >Sign in</a
+          >
+        </p>
+      </form>
+    </div>
+
+    <script>
+      const toggleIcon = document.getElementById("toggleIcon");
+      const passwordField = document.getElementById("passwordField");
+
+      toggleIcon.onclick = function () {
+        //  Toggle password visibility
+        if (passwordField.type === "password") {
+          passwordField.type = "text";
+          toggleIcon.classList.remove("bi-eye");
+          toggleIcon.classList.add("bi-eye-slash");
+        } else {
+          passwordField.type = "password";
+          toggleIcon.classList.remove("bi-eye-slash");
+          toggleIcon.classList.add("bi-eye");
+        }
+      };
+
+      const confirmPassInput = document.getElementById("confirmPassword");
+      const toggleConfirmPass = document.getElementById(
+        "toggleConfirmPassword"
+      );
+
+      toggleConfirmPass.addEventListener("click", () => {
+        // Toggle input type
+        if (confirmPassInput.type === "password") {
+          confirmPassInput.type = "text";
+          toggleConfirmPass.classList.remove("bi-eye-slash");
+          toggleConfirmPass.classList.add("bi-eye");
+        } else {
+          confirmPassInput.type = "password";
+          toggleConfirmPass.classList.remove("bi-eye");
+          toggleConfirmPass.classList.add("bi-eye-slash");
+        }
+      });
+    </script>
+  </body>
+</html>

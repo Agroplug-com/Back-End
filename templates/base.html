@@ -8,9 +8,22 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block extra_css %}{% endblock %}
     {% tailwind_css %}
-
+        <style>
+            /* Focus styles: thicker green border + subtle glow for inputs */
+            input:focus, textarea:focus, select:focus, .form-input:focus {
+                outline: none;
+                border-width: 2px !important;
+                border-color: #16a34a !important; /* tailwind green-600 */
+                box-shadow: 0 0 0 4px rgba(16,163,74,0.08); /* subtle green glow */
+                transition: box-shadow .12s ease, border-color .12s ease;
+            }
+            /* Make sure default inputs have a visible border to show focus change */
+            input, textarea, select {
+                border: 1px solid rgba(0,0,0,0.08);
+            }
+        </style>
 </head>
-<body class="bg-black">
+<body class="bg-gray-50">
     <!-- Messages -->
     {% if messages %}
     <div class="fixed top-4 right-4 z-50">
@@ -24,18 +37,18 @@
     {% endif %}
 
     <!-- Navbar -->
-    <nav class="bg-primary text-white shadow-lg">
+    <nav class="bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold">
                 <a href="{% url 'store:home' %}">Abiagrow.connect</a>
             </div>
-            <div class="flex gap-6 items-center">
+            <div class="flex gap-4 items-center">
                 {% if user.is_authenticated %}
-                    <span class="text-sm">Welcome, {{ user.username }}!</span>
+                    <span class="text-sm">Welcome, <span class="font-semibold">{{ user.username }}</span>!</span>
                     <a href="{% url 'userauths:logout' %}" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded">Logout</a>
                 {% else %}
                     <a href="{% url 'userauths:login' %}" class="bg-white text-black px-4 py-2 rounded hover:bg-gray-100">Login</a>
-                    <a href="{% url 'userauths:register' %}" class="bg-accent hover:bg-accent-dark px-4 py-2 rounded">Register</a>
+                    <a href="{% url 'userauths:register' %}" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded">Register</a>
                 {% endif %}
             </div>
         </div>
@@ -47,7 +60,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12 py-8">
+    <footer class="bg-green-900 text-white mt-12 py-8">
         <div class="container mx-auto px-4 text-center">
             <p>&copy; 2024 Abiagrow.connect. All rights reserved.</p>
         </div>
@@ -56,3 +69,38 @@
     {% block extra_js %}{% endblock %}
 </body>
 </html>
+ <!-- SweetAlert2: show Django messages nicely -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        {% for message in messages %}
+          Swal.fire({
+            title: '{{ message.level_tag|capfirst }}',
+            text: '{{ message|escapejs }}',
+            icon: {% if 'error' in message.tags %}'error'{% elif 'warning' in message.tags %}'warning'{% elif 'success' in message.tags %}'success'{% else %}'info'{% endif %},
+            confirmButtonColor: '#16a34a',
+            customClass: {
+              popup: 'rounded-lg'
+            }
+          });
+        {% endfor %}
+      });
+    </script>
+    {% endif %}
+
+    {# Optional single message via context: swal_message = {'title':..., 'text':..., 'level': 'success'|'error'|'info'|'warning'} #}
+    {% if swal_message %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const m = {{ swal_message|default:'{}'|safe }};
+        Swal.fire({
+          title: m.title || 'Notice',
+          text: m.text || '',
+          icon: m.level || 'info',
+          confirmButtonColor: '#16a34a',
+          customClass: { popup: 'rounded-lg' }
+        });
+      });
+    </script>
+    {% endif %}

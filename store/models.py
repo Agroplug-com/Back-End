@@ -64,6 +64,7 @@ class Product(models.Model):
     
     image = models.FileField(upload_to='products/', blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    unit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     unit_type = models.CharField(max_length=50, blank=True, null=True)
     
     availability_status = models.CharField(max_length=50, default='in_stock', choices=AVAILABILITY_STATUS_CHOICES)

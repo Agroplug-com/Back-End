@@ -1,0 +1,190 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harvesthub</title>
+    {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+    {% comment %} <link rel="stylesheet" href="{% static 'src/output.css' %}" /> {% endcomment %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    {% tailwind_css %}
+  </head>
+  <body
+    class="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-white font-['Inter']"
+  >
+    <div
+      class="hidden md:flex w-1/2 flex-col justify-center px-20 relative bg-[#278f59] bg-[image:linear-gradient(45deg,#2b9961_25%,transparent_25%,transparent_75%,#2b9961_75%,#2b9961),linear-gradient(45deg,#2b9961_25%,transparent_25%,transparent_75%,#2b9961_75%,#2b9961)] bg-[length:60px_60px] bg-[position:0_0,30px_30px]"
+    >
+      <div class="absolute inset-0 bg-[#278f59]/90"></div>
+      <div class="relative z-10 text-white">
+        <div class="flex items-center gap-4 mb-6">
+          <i class="ri-flower-line text-5xl"></i>
+          <h1
+          onclick="window.location.href ='mainlanding.html'" 
+          class="text-5xl font-bold">Harvesthub</h1>
+        </div>
+        <p class="text-xl font-light text-green-50">
+          Empowering farmers, buyers, and institutions with seamless digital
+          agriculture.
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="w-full md:w-1/2 h-full overflow-y-auto flex flex-col items-center justify-center p-8"
+    >
+      <div class="w-full max-w-md">
+        <div class="flex justify-center mb-6">
+          <div
+            class="h-14 w-14 bg-green-500 rounded-xl shadow-lg shadow-green-200 flex items-center justify-center text-white text-2xl"
+          >
+            <i class="ri-settings-4-fill"></i>
+          </div>
+        </div>
+
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-2">
+            Let's set up your Experience
+          </h2>
+          <p class="text-gray-500 text-sm">
+            Specify how you will use this platform to customize your experience.
+          </p>
+        </div>
+
+        <form id="role-form" class="space-y-4" method="POST">
+          {% csrf_token %}
+          <label
+            class="group relative flex items-center p-4 cursor-pointer rounded-xl border border-gray-200 hover:border-green-400 transition-all has-[:checked]:border-green-500 has-[:checked]:bg-green-50/50 has-[:checked]:shadow-sm"
+          >
+            <input
+              type="radio"
+              name="role"
+              value="Farmer"
+              class="peer hidden"
+              checked
+              onchange="updateButton(this)"
+            />
+
+            <div
+              class="h-10 w-10 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center transition-colors group-has-[:checked]:bg-green-600 group-has-[:checked]:text-white"
+            >
+              <i class="ri-plant-line text-xl"></i>
+            </div>
+
+            <div class="ml-4">
+              <span class="block text-sm font-bold text-gray-900">Farmer</span>
+              <span class="block text-xs text-gray-500 mt-1"
+                >Manage operations, sell produce, and access tools.</span
+              >
+            </div>
+
+            <div
+              class="absolute right-4 hidden group-has-[:checked]:flex h-5 w-5 rounded-full bg-green-500 items-center justify-center text-white text-xs"
+            >
+              <i class="ri-check-line font-bold"></i>
+            </div>
+          </label>
+
+          <label
+            class="group relative flex items-center p-4 cursor-pointer rounded-xl border border-gray-200 hover:border-green-400 transition-all has-[:checked]:border-green-500 has-[:checked]:bg-green-50/50 has-[:checked]:shadow-sm"
+          >
+            <input
+              type="radio"
+              name="role"
+              value="Buyer"
+              class="peer hidden"
+              onchange="updateButton(this)"
+            />
+
+            <div
+              class="h-10 w-10 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center transition-colors group-has-[:checked]:bg-green-600 group-has-[:checked]:text-white"
+            >
+              <i class="ri-store-2-line text-xl"></i>
+            </div>
+
+            <div class="ml-4">
+              <span class="block text-sm font-bold text-gray-900">Buyer</span>
+              <span class="block text-xs text-gray-500 mt-1"
+                >Discover trusted farmers and verify produce quality.</span
+              >
+            </div>
+
+            <div
+              class="absolute right-4 hidden group-has-[:checked]:flex h-5 w-5 rounded-full bg-green-500 items-center justify-center text-white text-xs"
+            >
+              <i class="ri-check-line font-bold"></i>
+            </div>
+          </label>
+
+          <label
+            class="group relative flex items-center p-4 cursor-pointer rounded-xl border border-gray-200 hover:border-green-400 transition-all has-[:checked]:border-green-500 has-[:checked]:bg-green-50/50 has-[:checked]:shadow-sm"
+          >
+            <input
+              type="radio"
+              name="role"
+              value="Service Provider"
+              class="peer hidden"
+              onchange="updateButton(this)"
+            />
+
+            <div
+              class="h-10 w-10 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center transition-colors group-has-[:checked]:bg-green-600 group-has-[:checked]:text-white"
+            >
+              <i class="ri-government-line text-xl"></i>
+            </div>
+
+            <div class="ml-4">
+              <span class="block text-sm font-bold text-gray-900"
+                >Service Provider</span
+              >
+              <span class="block text-xs text-gray-500 mt-1"
+                >Monitor compliance and access verified data.</span
+              >
+            </div>
+
+            <div
+              class="absolute right-4 hidden group-has-[:checked]:flex h-5 w-5 rounded-full bg-green-500 items-center justify-center text-white text-xs"
+            >
+              <i class="ri-check-line font-bold"></i>
+            </div>
+          </label>
+        </form>
+
+        <button
+          id="submit-btn"
+          class="w-full mt-8 bg-[#22c55e] hover:bg-green-600 text-white font-medium py-3.5 px-4 rounded-lg shadow-lg shadow-green-500/30 transition-colors"
+        >
+          Proceed as Farmer
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const submitBtn = document.getElementById("submit-btn");
+      function updateButton(input) {
+        submitBtn.innerText = `Proceed as ${input.value}`;
+      }
+
+      submitBtn.addEventListener("click", (e) => {
+        if (e.target.innerText === "Proceed as Buyer") {
+          window.location.href = "/userauths/register/";
+        } else if (e.target.innerText === "Proceed as Farmer") {
+          window.location.href = "/userauths/farmer-signup/";
+        } else if (e.target.innerText === "Proceed as Service Provider") {
+          window.location.href = "service-prov-signup.html";
+        } else {
+          console.log("Balabluuu");
+        }
+      });
+    </script>
+    A
+  </body>
+</html>

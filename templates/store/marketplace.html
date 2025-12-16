@@ -1,0 +1,1117 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pocket - Fresh From Farm</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    {% tailwind_css %}
+  </head>
+  <style>
+    body {
+      font-family: "Inter";
+    }
+  </style>
+  <body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <i class="fas fa-tractor text-3xl text-green-700"></i>
+          <h1 class="text-3xl font-bold text-green-700">Agro-Connect</h1>
+          <span
+            class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-medium"
+            >50+ Farmers</span
+          >
+        </div>
+
+        <!-- Right icons: notifications, cart, profile -->
+        <div class="flex items-center gap-5">
+          
+
+          <!-- CART ICON (moved to top) -->
+          <div
+            class="relative cursor-pointer hover:text-green-600 transition"
+            title="Cart"
+            onclick="openCart()"
+          >
+            <i class="fas fa-shopping-cart text-lg text-gray-600"></i>
+            <span
+              id="cartCount"
+              class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full"
+            >
+              0
+            </span>
+          </div>
+
+          
+          <!-- Profile Dropdown Wrapper -->
+          <div class="relative ml-3">
+            <button
+              onclick="toggleProfileMenu()"
+              class="hover:text-green-600 transition"
+              title="Profile"
+            >
+              <i class="fas fa-user-circle text-xl text-gray-600"></i>
+            </button>
+
+            <!-- DROPDOWN MENU -->
+            <div
+              id="profileDropdown"
+              class="hidden absolute right-0 mt-3 w-48 bg-white shadow-lg rounded-lg border border-gray-200 z-50"
+            >
+              <!-- Sign In Button -->
+               {% if request.user.is_authenticated %}
+               <a
+                 href="{% url "userauths:logout" %}"
+                 class="block text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-t-lg"
+               >
+                 Sign Out
+               </a>
+               {% else %}
+               <a
+                 href="{% url "userauths:login" %}"
+                 class="block text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-t-lg"
+               >
+                 Sign In
+               </a>
+               {% endif %}
+
+              <!-- Menu List -->
+              <div class="py-2">
+                <a
+                  href="#"
+                  class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
+                >
+                  <i class="fas fa-user text-gray-600"></i> My Account
+                </a>
+
+                <a
+                  href="#"
+                  class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
+                >
+                  <i class="fas fa-box text-gray-600"></i> Orders
+                </a>
+                <a
+                  href="{% url "store:dashboard" %}"
+                  class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
+                >
+                  <i class="fas fa-box text-gray-600"></i> Dashoard
+                </a>
+
+                <a
+                  href="#"
+                  class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
+                >
+                  <i class="fas fa-heart text-gray-600"></i> Wishlist
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="relative group inline-block">
+            <!-- Hover trigger (your original code) -->
+            <div
+              class="flex items-center gap-1 text-gray-700 cursor-pointer group-hover:text-green-600"
+            >
+              <i class="fa-regular fa-circle-question text-xl"></i>
+              <i class="fa-solid fa-chevron-down text-sm"></i>
+            </div>
+
+            <!-- Dropdown -->
+            <div
+              class="absolute mt-1 w-40 bg-white border rounded shadow hidden group-hover:block"
+            >
+              <a
+                href="mainlanding.html"
+                class="block px-3 py-2 hover:bg-gray-100"
+                >Home</a
+              >
+              <a href="#" class="block px-3 py-2 hover:bg-gray-100">FAQs</a>
+              <a href="#" class="block px-3 py-2 hover:bg-gray-100">Support</a>
+              <a
+                href="#"
+                class="block px font-thin-3 pl-3 py-2 hover:bg-gray-100"
+                >Customer Service</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4">
+      <!-- Search Bar -->
+      <div class="my-6">
+        <div class="relative">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search fruits, vegetables, grains, dairy..."
+            class="w-full pl-12 pr-6 py-4 rounded-full border border-gray-300 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 text-lg transition"
+          />
+          <i class="fas fa-search absolute left-4 top-5 text-gray-500"></i>
+        </div>
+      </div>
+
+      <!-- Seller Banner Slider Wrapper -->
+      <div class="relative overflow-hidden rounded-2xl">
+        <!-- Slider Track -->
+        <div
+          id="sellerSlider"
+          class="flex transition-transform duration-700 touch-pan-x"
+        >
+          <!-- Slide 1 -->
+          <div
+            class="min-w-full bg-cover bg-center w-full text-shadow rounded-2xl p-8 text-gray-300 shadow-lg"
+            style="background-image: url('{% static "img/cheerful-african-farmer-talking-phone-while-working-field.jpg" %}');"
+          >
+            <div class="flex items-center gap-3 mb-2">
+              <i class="fas fa-seedling text-3xl"></i>
+              <h2 class="text-2xl font-bold">Why Stress Yourelf</h2>
+            </div>
+            <p class="text-4xl font-extrabold mt-2">
+              Get fresh agro products from the comfort of your home
+            </p>
+            <p class="text-green-100 mt-2">
+              Join 2000+ People buying Fresh Produce on our app
+            </p>
+            <button
+              class="mt-6 bg-white text-green-700 font-bold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition transform"
+            >
+              <i class="fas fa-arrow-right mr-2"></i>Order a Product Today!
+            </button>
+          </div>
+
+          <!-- Slide 2 -->
+          <div
+            class="min-w-full bg-cover bg-center text-shadow rounded-2xl p-8 text-gray-300 shadow-lg"
+            style="background-image: url('{% static "img/african-man-harvesting-vegetables.jpg" %}');"
+          >
+            <div class="flex items-center gap-3 mb-2">
+              <i class="fas fa-seedling text-3xl"></i>
+              <h2 class="text-2xl font-bold">Are you a Farmer?</h2>
+            </div>
+            <p class="text-4xl font-extrabold mt-2">
+              Sell your fresh products directly
+            </p>
+            <p class="text-green-100 mt-2">
+              Join 50+ farmers earning more by selling directly to customers
+            </p>
+            <button
+              class="mt-6 bg-white text-green-700 font-bold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition transform"
+            >
+              <i class="fas fa-arrow-right mr-2"></i>Become a Seller
+            </button>
+          </div>
+
+          <!-- Slide 3 -->
+          <div
+            class="min-w-full bg-cover bg-center text-shadow rounded-2xl p-8 text-gray-300 shadow-lg"
+            style="background-image: url('{% static "img/photorealistic-view-african-people-harvesting-vegetables-grains.jpg" %}');"
+          >
+            <div class="flex items-center gap-3 mb-2">
+              <i class="fas fa-seedling text-3xl"></i>
+              <h2 class="text-2xl font-bold">Are you a Farmer?</h2>
+            </div>
+            <p class="text-4xl font-extrabold mt-2">
+              Sell your fresh products directly
+            </p>
+            <p class="text-green-100 mt-2">
+              Join 50+ farmers earning more by selling directly to customers
+            </p>
+            <button
+              class="mt-6 bg-white text-green-700 font-bold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition transform"
+            >
+              <i class="fas fa-arrow-right mr-2"></i>Become a Seller
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2 pt-5 pb-5">
+          <i class="fas fa-th-large text-green-600 pr-2"></i>
+          Categories
+        </h2>
+        <!-- Used Tailwind arbitrary variants to hide scrollbars -->
+        <div
+          class="flex gap-4 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+        >
+        <button
+           class="category-chip px-5 py-3 rounded-full whitespace-nowrap border-2 border-gray-300 bg-white text-gray-700 flex items-center gap-2 font-medium transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-0.5 hover:shadow-md hover:border-green-600"
+         >
+           <i class="fas fa-egg"></i> All
+         </button>
+         {% for category in categories %}
+         <button
+           class="category-chip px-5 py-3 rounded-full whitespace-nowrap border-2 border-gray-300 bg-white text-gray-700 flex items-center gap-2 font-medium transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-0.5 hover:shadow-md hover:border-green-600"
+         >
+           <i class="fas fa-egg"></i> {{ category.name }}
+         </button>
+         {% endfor %}
+         
+        </div>
+      </section>
+
+      <!-- Sponsored Products -->
+      <section class="mb-10">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-bold flex items-center gap-2">
+            <i class="fas fa-star text-yellow-500"></i>
+            Sponsored Products
+          </h2>
+          <button
+            class="text-green-600 font-medium hover:text-green-700 transition"
+          >
+            View All →
+          </button>
+        </div>
+        <div
+          id="sponsoredProducts"
+          class="flex gap-5 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+        >
+          {% for product in products %}
+          <div class="product-card {{ product.name }} bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="{{ product.primary_image.image.url }}" class="w-full h-40 object-cover" alt="{{ product.name|title }} Image"/>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Organic Basmati Rice">
+                {{ product.name|title }}
+              </p>
+              <p class="text-gray-500 text-xs">
+                
+                Unit: {{ product.unit|default:"" }} {{ product.unit_type|title }}
+                
+              </p>
+              <p class="text-gray-500 text-xs">
+                Stock: {{ product.stock_quantity }}
+              </p>
+              <p class="text-green-600 font-bold text-lg mt-1">
+                &#8358;{{ product.price }}
+              </p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Organic Basmati Rice', 8500, '5kg')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+
+          
+        </div>
+      </section>
+
+      <!-- Best Selling -->
+      <section class="mb-10">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-bold text-red-600 flex items-center gap-2">
+            <i class="fas fa-fire"></i>
+            Best Selling This Week
+          </h2>
+          <button
+            class="text-green-600 font-medium hover:text-green-700 transition"
+          >
+            View All →
+          </button>
+        </div>
+        <div
+          id="bestSelling"
+          class="flex gap-5 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+        >
+          <!-- Basmati Rice (Best Seller) -->
+          <div class="product-card product-Grains bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?rice,basmati" class="w-full h-40 object-cover" alt="Basmati Rice"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Basmati Rice">Basmati Rice</p>
+              <p class="text-gray-500 text-xs">10kg</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦15,000</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Basmati Rice', 15000, '10kg')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Tomato (Best Seller) -->
+          <div class="product-card product-Vegetables bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?tomato,vegetable" class="w-full h-40 object-cover" alt="Tomato"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Tomato">Tomato</p>
+              <p class="text-gray-500 text-xs">5kg</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦2,500</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Tomato', 2500, '5kg')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Milk (Best Seller) -->
+          <div class="product-card product-Dairy bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?milk,fresh" class="w-full h-40 object-cover" alt="Milk"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Milk">Milk</p>
+              <p class="text-gray-500 text-xs">1L</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦1,500</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Milk', 1500, '1L')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Black Lentils (Best Seller) -->
+          <div class="product-card product-Grains bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?lentils,beans,dry" class="w-full h-40 object-cover" alt="Black Lentils"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Black Lentils">Black Lentils</p>
+              <p class="text-gray-500 text-xs">2kg</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦3,200</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Black Lentils', 3200, '2kg')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Carrots (Best Seller) -->
+          <div class="product-card product-Vegetables bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?carrot,vegetable,orange" class="w-full h-40 object-cover" alt="Carrots"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Carrots">Carrots</p>
+              <p class="text-gray-500 text-xs">2kg</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦1,800</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Carrots', 1800, '2kg')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Banana (Best Seller) -->
+          <div class="product-card product-Fruits bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?banana,fruit,yellow" class="w-full h-40 object-cover" alt="Banana"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Banana">Banana</p>
+              <p class="text-gray-500 text-xs">1 bunch</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦800</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Banana', 800, '1 bunch')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Ginger (Best Seller) -->
+          <div class="product-card product-Herbs---Spices bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?ginger,root,spice" class="w-full h-40 object-cover" alt="Ginger"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Ginger">Ginger</p>
+              <p class="text-gray-500 text-xs">500g</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦1,000</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Ginger', 1000, '500g')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Yogurt (Best Seller) -->
+          <div class="product-card product-Dairy bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?yogurt,dairy,white" class="w-full h-40 object-cover" alt="Yogurt"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Yogurt">Yogurt</p>
+              <p class="text-gray-500 text-xs">500g</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦900</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Yogurt', 900, '500g')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Potato (Best Seller) -->
+          <div class="product-card product-Root-Crops bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?potato,vegetable,root" class="w-full h-40 object-cover" alt="Potato"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Potato">Potato</p>
+              <p class="text-gray-500 text-xs">5kg</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦2,200</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Potato', 2200, '5kg')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Honey (Best Seller) -->
+          <div class="product-card product-Herbs---Spices bg-white rounded-2xl shadow-md overflow-hidden w-48 flex-shrink-0 transition-transform duration-200 ease-in-out hover:-translate-y-1">
+            <div class="relative">
+              <img src="https://source.unsplash.com/random/300x300/?honey,jar,organic" class="w-full h-40 object-cover" alt="Honey"/>
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                🔥 BEST SELLER
+              </div>
+              <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                <i class="far fa-heart text-gray-600"></i>
+              </button>
+            </div>
+            <div class="p-3">
+              <p class="font-medium text-sm truncate" title="Honey">Honey</p>
+              <p class="text-gray-500 text-xs">500g</p>
+              <p class="text-green-600 font-bold text-lg mt-1">₦2,000</p>
+              <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Honey', 2000, '500g')">
+                <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {% comment %} <!-- Category Sections -->
+      <div id="categorySections" class="space-y-12">
+        <!-- Rice Deals -->
+        <section>
+          
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <!-- Basmati 1121 -->
+            <div class="product-card product-Grains bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-200 ease-in-out hover:-translate-y-1">
+              <div class="relative">
+                <img src="https://source.unsplash.com/random/300x300/?rice,basmati,white" class="w-full h-40 object-cover" alt="Basmati 1121"/>
+                <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                  <i class="far fa-heart text-gray-600"></i>
+                </button>
+              </div>
+              <div class="p-3">
+                <p class="font-medium text-sm truncate" title="Basmati 1121">Basmati 1121</p>
+                <p class="text-gray-500 text-xs">5kg</p>
+                <p class="text-green-600 font-bold text-lg mt-1">₦8,200</p>
+                <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Basmati 1121', 8200, '5kg')">
+                  <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+
+            <!-- Sona Masoori -->
+            <div class="product-card product-Grains bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-200 ease-in-out hover:-translate-y-1">
+              <div class="relative">
+                <img src="https://source.unsplash.com/random/300x300/?rice,sona" class="w-full h-40 object-cover" alt="Sona Masoori"/>
+                <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                  <i class="far fa-heart text-gray-600"></i>
+                </button>
+              </div>
+              <div class="p-3">
+                <p class="font-medium text-sm truncate" title="Sona Masoori">Sona Masoori</p>
+                <p class="text-gray-500 text-xs">5kg</p>
+                <p class="text-green-600 font-bold text-lg mt-1">₦6,500</p>
+                <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Sona Masoori', 6500, '5kg')">
+                  <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+
+            <!-- Ponni Rice -->
+            <div class="product-card product-Grains bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-200 ease-in-out hover:-translate-y-1">
+              <div class="relative">
+                <img src="https://source.unsplash.com/random/300x300/?rice,ponni" class="w-full h-40 object-cover" alt="Ponni Rice"/>
+                <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                  <i class="far fa-heart text-gray-600"></i>
+                </button>
+              </div>
+              <div class="p-3">
+                <p class="font-medium text-sm truncate" title="Ponni Rice">Ponni Rice</p>
+                <p class="text-gray-500 text-xs">5kg</p>
+                <p class="text-green-600 font-bold text-lg mt-1">₦7,200</p>
+                <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Ponni Rice', 7200, '5kg')">
+                  <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+
+            <!-- Brown Rice -->
+            <div class="product-card product-Grains bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-200 ease-in-out hover:-translate-y-1">
+              <div class="relative">
+                <img src="https://source.unsplash.com/random/300x300/?rice,brown" class="w-full h-40 object-cover" alt="Brown Rice"/>
+                <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                  <i class="far fa-heart text-gray-600"></i>
+                </button>
+              </div>
+              <div class="p-3">
+                <p class="font-medium text-sm truncate" title="Brown Rice">Brown Rice</p>
+                <p class="text-gray-500 text-xs">5kg</p>
+                <p class="text-green-600 font-bold text-lg mt-1">₦9,500</p>
+                <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Brown Rice', 9500, '5kg')">
+                  <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+
+            <!-- Idli Rice -->
+            <div class="product-card product-Grains bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-200 ease-in-out hover:-translate-y-1">
+              <div class="relative">
+                <img src="https://source.unsplash.com/random/300x300/?rice,idli" class="w-full h-40 object-cover" alt="Idli Rice"/>
+                <button class="absolute top-2 right-2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100 transition">
+                  <i class="far fa-heart text-gray-600"></i>
+                </button>
+              </div>
+              <div class="p-3">
+                <p class="font-medium text-sm truncate" title="Idli Rice">Idli Rice</p>
+                <p class="text-gray-500 text-xs">5kg</p>
+                <p class="text-green-600 font-bold text-lg mt-1">₦6,800</p>
+                <button class="mt-2 w-full bg-green-600 text-white text-sm py-2 rounded-full hover:bg-green-700 transition transform hover:scale-105" onclick="addToCart('Idli Rice', 6800, '5kg')">
+                  <i class="fas fa-cart-plus mr-1"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </section> {% endcomment %}
+
+        
+        
+      </div>
+
+      <!-- Ad Banner -->
+      <div
+        class="my-12 bg-green-600 rounded-2xl p-10 text-center text-white shadow-xl hover:shadow-2xl transition"
+      >
+        <i class="fas fa-gift text-5xl mb-4"></i>
+
+        <h2 class="text-4xl font-bold mb-4">Flat 30% OFF on First Order!</h2>
+
+        <p class="text-xl mb-6">
+          Use Code:
+          <span
+            class="font-mono bg-white text-green-600 px-4 py-2 rounded font-bold"
+            >FARM30</span
+          >
+        </p>
+
+        <button
+          class="bg-white text-green-600 font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition transform"
+        >
+          <i class="fas fa-shopping-bag mr-2"></i>
+          Shop Now
+        </button>
+      </div>
+    </main>
+
+    <!-- FOOTER (replaces bottom nav) -->
+    <!-- Footer -->
+    <footer class="bg-green-600 text-white py-16 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
+          <div>
+            <div class="flex flex-col items-start mb-6">
+              <div class="text-white text-4xl mb-2">🍃</div>
+              <span class="font-bold text-xl">AbiaGrow.Connect</span>
+            </div>
+            <p class="text-green-50 text-sm leading-relaxed">
+              Empowering Abia State farmers through technology, finance, and
+              sustainable agricultural practices.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+            <ul class="space-y-3 text-green-50 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Our Services</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Impact Stories</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-lg mb-4">Services</h4>
+            <ul class="space-y-3 text-green-50 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition">Marketplace</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Logistics</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Insurance</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Loans</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-lg mb-4">Connect With Us</h4>
+            <div class="flex gap-4 mb-6">
+              <a
+                href="#"
+                class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-800 transition"
+              >
+                <i class="bi bi-facebook"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-800 transition"
+              >
+                <i class="bi bi-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-800 transition"
+              >
+                <i class="bi bi-instagram"></i>
+              </a>
+            </div>
+            <p class="text-green-50 text-sm">info@abiagrow.com</p>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-green-500 pt-8 text-center text-green-50 text-sm"
+        >
+          <p>
+            &copy; <span id="year"></span> AbiaGrow.Connect. All rights
+            reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- RIGHT SLIDING CART -->
+    <div
+      id="cartSidebar"
+      class="fixed top-0 right-0 w-80 h-full bg-white shadow-xl transform translate-x-full transition-transform duration-300 z-[999]"
+    >
+      <!-- Cart Header -->
+      <div class="flex items-center justify-between p-4 border-b">
+        <h2 class="text-xl font-bold">My Cart</h2>
+        <button onclick="closeCart()" aria-label="Close cart">
+          <i class="fas fa-times text-gray-600 text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Cart Items -->
+      <div id="cartItemsList" class="p-4 space-y-3 overflow-y-auto h-[70%]">
+        <!-- Items will render here -->
+      </div>
+
+      <!-- Footer Buttons (View Item + Checkout side by side) -->
+      <div class="p-4 border-t">
+        <div class="flex gap-3">
+          <button
+            id="viewItemBtn"
+            class="flex-1 bg-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-400"
+            onclick="viewSelectedItem()"
+            disabled
+          >
+            View Item
+          </button>
+          <button
+            id="checkoutBtn"
+            class="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700"
+            onclick="window.location.href= 'checkout-page.html'"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACKDROP -->
+    <div
+      id="cartOverlay"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden z-[998]"
+      onclick="closeCart()"
+    ></div>
+
+    <script>
+      function toggleProfileMenu() {
+        const menu = document.getElementById("profileDropdown");
+        menu.classList.toggle("hidden");
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", function (e) {
+        const dropdown = document.getElementById("profileDropdown");
+        const profileBtn = e.target.closest('[title="Profile"]');
+
+        if (!profileBtn && !dropdown.contains(e.target)) {
+          dropdown.classList.add("hidden");
+        }
+      });
+
+      // Set year in footer
+      document.getElementById("year").innerText = new Date().getFullYear();
+
+      // JS for Auto Sliding + Swipe (unchanged)
+      const slider = document.getElementById("sellerSlider");
+      const slides = slider.children.length;
+      let index = 0;
+      let startX = 0;
+      let currentX = 0;
+
+      // Auto Slide
+      function moveSlide() {
+        index = (index + 1) % slides;
+        slider.style.transform = `translateX(-${index * 100}%)`;
+      }
+
+      let autoSlide = setInterval(moveSlide, 4000);
+
+      // Touch Events (Swipe)
+      slider.addEventListener("touchstart", (e) => {
+        clearInterval(autoSlide);
+        startX = e.touches[0].clientX;
+      });
+
+      slider.addEventListener("touchmove", (e) => {
+        currentX = e.touches[0].clientX;
+      });
+
+      slider.addEventListener("touchend", () => {
+        let diff = startX - currentX;
+
+        if (diff > 40) {
+          // Swipe Left → Next slide
+          index = (index + 1) % slides;
+        } else if (diff < -40) {
+          // Swipe Right → Previous slide
+          index = (index - 1 + slides) % slides;
+        }
+
+        slider.style.transform = `translateX(-${index * 100}%)`;
+
+        autoSlide = setInterval(moveSlide, 4000);
+      });
+
+      
+
+      // CART - central store (in-memory). You can extend to localStorage easily.
+      let cart = []; // items: { id, name, price, unit, qty }
+      const cartCountEl = document.getElementById("cartCount");
+      const cartSidebar = document.getElementById("cartSidebar");
+      const cartOverlay = document.getElementById("cartOverlay");
+      const cartItemsList = document.getElementById("cartItemsList");
+      const viewItemBtn = document.getElementById("viewItemBtn");
+      const checkoutBtn = document.getElementById("checkoutBtn");
+
+      // Open / Close cart
+      function openCart() {
+        cartSidebar.classList.remove("translate-x-full");
+        cartOverlay.classList.remove("hidden");
+        updateCartDisplay();
+      }
+      function closeCart() {
+        cartSidebar.classList.add("translate-x-full");
+        cartOverlay.classList.add("hidden");
+        // clear selection
+        selectedCartIndex = null;
+        updateFooterButtons();
+      }
+
+     
+      // Small toast message
+      function showToast(text) {
+        const message = document.createElement("div");
+        message.className =
+          "fixed top-20 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-[fadeIn_0.2s_ease-out]";
+        message.innerText = text;
+        document.body.appendChild(message);
+        setTimeout(() => {
+          message.classList.add("opacity-0");
+          setTimeout(() => message.remove(), 300);
+        }, 1400);
+      }
+
+      // Selected item index in cart for the footer "View Item" action
+      let selectedCartIndex = null;
+
+      // Update cart display inside the sidebar
+      function updateCartDisplay() {
+        cartItemsList.innerHTML = "";
+
+        if (cart.length === 0) {
+          cartItemsList.innerHTML = `<p class="text-gray-500 text-center mt-10">Your cart is empty.</p>`;
+          cartCountEl.innerText = 0;
+          updateFooterButtons();
+          return;
+        }
+
+        cart.forEach((item, index) => {
+          // Row element
+          const div = document.createElement("div");
+          div.className =
+            "bg-gray-100 p-3 rounded-lg flex items-center justify-between gap-3";
+
+          const left = document.createElement("div");
+          left.className = "flex-1";
+          left.innerHTML = `
+            <p class="font-semibold text-sm">${item.name}</p>
+            <p class="text-xs text-gray-500">${item.unit} • ${formatPrice(
+            item.price
+          )}</p>
+            <div class="mt-2 flex items-center gap-2">
+              <button class="px-2 py-1 bg-white border rounded" onclick="decreaseQty(${index})">-</button>
+              <span class="px-2">${item.qty}</span>
+              <button class="px-2 py-1 bg-white border rounded" onclick="increaseQty(${index})">+</button>
+            </div>
+          `;
+
+          const right = document.createElement("div");
+          right.className = "flex flex-col items-end gap-2";
+          const viewBtn = document.createElement("button");
+          viewBtn.className =
+            "bg-green-600 text-white px-3 py-1 rounded text-sm";
+          viewBtn.innerText = "View";
+          viewBtn.onclick = () => {
+            // mark selected index
+            selectedCartIndex = index;
+            updateFooterButtons();
+            // Example behaviour: scroll to product section or open product; for now show alert
+            alert(
+              `View item: ${item.name}\nPrice: ${formatPrice(
+                item.price
+              )}\nUnit: ${item.unit}`
+            );
+          };
+
+          const removeBtn = document.createElement("button");
+          removeBtn.className = "text-xs text-red-600 underline";
+          removeBtn.innerText = "Remove";
+          removeBtn.onclick = () => {
+            cart.splice(index, 1);
+            cartCountEl.innerText = cart.reduce((s, it) => s + it.qty, 0);
+            updateCartDisplay();
+          };
+
+          const priceP = document.createElement("p");
+          priceP.className = "text-sm font-semibold";
+          priceP.innerText = formatPrice(item.price * item.qty);
+
+          right.appendChild(priceP);
+          right.appendChild(viewBtn);
+          right.appendChild(removeBtn);
+
+          div.appendChild(left);
+          div.appendChild(right);
+
+          cartItemsList.appendChild(div);
+        });
+
+        // update count badge
+        cartCountEl.innerText = cart.reduce((s, it) => s + it.qty, 0);
+        updateFooterButtons();
+      }
+
+      function increaseQty(index) {
+        cart[index].qty += 1;
+        updateCartDisplay();
+      }
+      function decreaseQty(index) {
+        if (cart[index].qty > 1) {
+          cart[index].qty -= 1;
+        } else {
+          // remove if reaches zero
+          cart.splice(index, 1);
+        }
+        updateCartDisplay();
+      }
+
+      // Footer buttons activation
+      function updateFooterButtons() {
+        if (selectedCartIndex !== null && cart[selectedCartIndex]) {
+          viewItemBtn.disabled = false;
+          viewItemBtn.classList.remove("bg-gray-300");
+        } else {
+          viewItemBtn.disabled = true;
+          viewItemBtn.classList.add("bg-gray-300");
+        }
+        checkoutBtn.disabled = cart.length === 0;
+        if (checkoutBtn.disabled) {
+          checkoutBtn.classList.add("opacity-60", "cursor-not-allowed");
+        } else {
+          checkoutBtn.classList.remove("opacity-60", "cursor-not-allowed");
+        }
+      }
+
+      function viewSelectedItem() {
+        if (selectedCartIndex === null) {
+          alert("Select an item by clicking 'View' on any cart item.");
+          return;
+        }
+        const item = cart[selectedCartIndex];
+        alert(
+          `Viewing ${item.name}\nPrice: ${formatPrice(item.price)}\nUnit: ${
+            item.unit
+          }\nQty: ${item.qty}`
+        );
+      }
+
+      function checkout() {
+        if (cart.length === 0) {
+          alert("Your cart is empty.");
+          return;
+        }
+        // Placeholder: send to checkout flow
+        const total = cart.reduce((s, it) => s + it.price * it.qty, 0);
+        alert(
+          `Proceeding to checkout\nItems: ${cart.length}\nTotal: ${formatPrice(
+            total
+          )}`
+        );
+        // Clear cart for demo:
+        // cart = []; updateCartDisplay();
+      }
+
+      // ===== STATIC HTML PRODUCT RENDERING =====
+      // All products are now rendered as static HTML in the DOM.
+      // The following data and rendering code is preserved for reference but is no longer used:
+      // - sponsoredProducts array
+      // - bestSellingProducts array
+      // - categories array
+      // - createProductCard() function
+      // Instead, product cards are built into the HTML structure with:
+      // - Category classes for filtering (e.g., product-Grains, product-Fruits)
+      // - onclick="addToCart(...)" handlers on each "Add to Cart" button
+      // - Static image URLs from Unsplash
+      // ====================================
+
+      // Search functionality (placeholder)
+      document.getElementById("searchInput").addEventListener("input", (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        console.log("Searching for:", searchTerm);
+      });
+
+      // Category filter functionality
+      document.querySelectorAll(".category-chip").forEach((chip) => {
+        chip.addEventListener("click", function () {
+          document.querySelectorAll(".category-chip").forEach((c) => {
+            c.classList.remove(
+              "bg-green-600",
+              "text-white",
+              "border-green-600"
+            );
+            c.classList.add("bg-white", "text-gray-700", "border-gray-300");
+          });
+          this.classList.add("bg-green-600", "text-white", "border-green-600");
+          this.classList.remove("bg-white", "text-gray-700", "border-gray-300");
+
+          // Get selected category from the chip
+          const chipText = this.textContent.trim();
+          filterProductsByCategory(chipText);
+        });
+      });
+
+      // Filter products by category - shows/hides products without page refresh
+      function filterProductsByCategory(categoryName) {
+        const allProductCards = document.querySelectorAll(".product-card");
+        const categoryClass = `product-${categoryName.replace(/ /g, "-")}`;
+
+        allProductCards.forEach((card) => {
+          // Show if card has the selected category class
+          if (card.classList.contains(categoryClass)) {
+            card.style.display = "";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+    </script>
+
+  </body>
+</html>

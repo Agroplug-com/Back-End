@@ -11,22 +11,39 @@ from service_providers.models import Service_Provider
 
 # Create your views here.
 
-@email_verification_required
-def index(request):
-    return render(request, 'userauths/home.html')
+# @email_verification_required
+def home(request):
+    categories = store_models.Category.objects.all()
+    products = store_models.Product.objects.filter(availability_status='in_stock')
+    context = {
+        "categories": categories,
+        "products":products
+    }
+    return render(request, 'store/marketplace.html', context)
 
 @email_verification_required
-def dashboard(request):
+def index(request):
     if request.user.profile.user_type == "farmer":
         return redirect('farmers:dashboard')
     elif request.user.profile.user_type == "buyer":
-        return redirect("store:dashboard")
+        return redirect("store:buyer_dashboard")
     elif request.user.profile.user_type == "service_provider":
         return render(request, 'store/service_provider_dashboard.html')
     elif request.user.profile.user_type == "admin":
         return render(request, 'store/admin_dashboard.html')
     else:
         return render(request, 'store/dashboard.html')
+
+@email_verification_required
+def buyer_dashoard(request):
+    user = request.user
+    return render(request, "store/dashboard.html")
+
+
+def orders(request):
+    return render(request, "store/myorder.html")
+
+
 
 
 @email_verification_required
